@@ -30,22 +30,39 @@ const clearErrorMessage = dispatch => () => {
 
 const signup = dispatch => async ({ username, password }) => {
   try {
-    // insert code here
+    const response = await axios.post(
+      "https://pcmob4-blog-api.herokuapp.com/newuser",
+      { username, password }
+    );
+    navigate("Index");
   } catch (err) {
-    // insert code here
+    dispatch({ type: "add_error", payload: `${err}` });
   }
 };
 
 const signin = dispatch => async ({ username, password }) => {
   try {
-    // insert code here
+    const response = await axios.post(
+      "https://pcmob4-blog-api.herokuapp.com/auth",
+      { username, password }
+    );
+    dispatch({
+      type: "signin",
+      payload: response
+    });
+    navigate("Index");
   } catch (err) {
-    // insert code here
+    dispatch({
+      type: "add_error",
+      payload: `{$err}`
+    });
   }
 };
 
 const signout = dispatch => async () => {
-  // insert code here
+  await AsyncStorage.removeItem("token");
+  dispatch({ type: "signout" });
+  navigate("loginFlow");
 };
 
 export const { Provider, Context } = createDataContext(

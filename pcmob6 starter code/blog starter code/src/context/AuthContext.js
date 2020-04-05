@@ -4,23 +4,7 @@ import { navigate } from "../navigationRef";
 import axios from "axios";
 
 const authReducer = (state, action) => {
-  switch (action.type) {
-    case "add_error":
-      return { ...state, errorMessage: action.payload };
-    case "signin":
-      console.log("signin");
-      const res = JSON.parse(action.payload.request._response);
-      console.log(res.access_token);
-      axios.defaults.headers.common[
-        "Authorization"
-      ] = `JWT ${res.access_token}`;
-      return { ...state, errorMessage: "", token: res.access_token };
-    case "clear_error_message":
-      return { ...state, errorMessage: "" };
-    case "signout":
-      return { ...state, token: null, errorMessage: "" };
-    default:
-      return state;
+  // insert code here
   }
 };
 
